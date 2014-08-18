@@ -14,8 +14,8 @@ namespace ShadoLib
         /// <summary>
         /// Formate a supplied number of bytes into a human friendly string.
         /// </summary>
-        /// <param name="bytes">Number of bytes supplied as ulong</param>
-        /// <returns></returns>
+        /// <param name="bytes">Number of bytes to format</param>
+        /// <returns>Supplied bytes formated as a string, for example 1024 will return 1 KB</returns>
         public static String BytesFormat(ulong bytes)
         {
             if (bytes >= 1125899906842624)
@@ -38,7 +38,7 @@ namespace ShadoLib
         /// Take arguments and their values (if any) supplied from a command line and reformat them into key-value pairs, saved into a hashtable
         /// </summary>
         /// <param name="args">Array of arguments usually obtained from the system</param>
-        /// <returns></returns>
+        /// <returns>Array where names of the arguments are keys and their values are assigned to the keys</returns>
         public static Hashtable ArgCutter(String[] args)
         {
             var argsLine = String.Join(" ", args);
@@ -58,7 +58,7 @@ namespace ShadoLib
         /// </summary>
         /// <param name="path">Relative path to the resource</param>
         /// <param name="assembly">Assembly in which the presence of the resource should be checked</param>
-        /// <returns></returns>
+        /// <returns>True if the resource exists, false if it does not</returns>
         public static bool ResourceExists(string path, Assembly assembly)
         {           
             using (var stream = assembly.GetManifestResourceStream(assembly.GetName().Name + ".g.resources"))
@@ -77,11 +77,10 @@ namespace ShadoLib
         }
 
         /// <summary>
-        /// Generate a list of all directories and subdirectories contained within a supplied root directory
+        /// Recursively generate a list of all directories and subdirectories contained within the supplied root directory
         /// </summary>
         /// <param name="rootDir">Path to the root directory, from which the search begins</param>
-        /// <param name="dirList"></param>
-        /// <returns></returns>
+        /// <returns>Flat list of all directories, including subdirectories, contained within the supplied root directory</returns>
         public static List<string> GetDirectoryList(string rootDir, List<string> dirList = null)
         {
             if(dirList == null)
